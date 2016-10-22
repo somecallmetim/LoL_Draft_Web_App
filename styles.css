@@ -1,3 +1,42 @@
+.blue-side {
+	float: left;
+	padding: 30px;
+	border-style: ridge;
+	width: 200px;
+	height: 716px;
+	margin: 10px;
+}
+
+.champ-list {
+	padding: 0;
+	border-style: ridge;
+	margin:  10px auto;
+	width: 1025px;
+	height: 716px;
+	overflow: auto;
+}
+
+#champ-list {
+	width: 100%;
+	padding-left: 15px;
+}
+
+.red-side {
+	float:right;
+	padding: 30px;
+	border-style: ridge;
+	width: 200px;
+	height: 716px;
+	margin: 10px;
+}
+
+.bans {
+	height: 150px;
+	width: 1400px;
+	margin: 25px auto;
+	border-style: ridge;
+}
+
 .force-column-left {
 	float: left;
 	padding: 0;
@@ -5,21 +44,17 @@
 	margin: 10px;
 }
 
-.blue-side {
+#blue-side-bans {
 	float: left;
-	padding: 0;
-	width: 120px;
-	margin: 10px;
-	margin-right: 30px;
+	padding: 10px;
 }
 
-.red-side {
+#red-side-bans {
 	float: right;
-	padding: 0;
-	width: 120px;
-	margin: 10px;
+	padding: 10px;
 }
 
 .icon {
 	margin: 5px;
+	padding-left: 2px;
 }

@@ -14,12 +14,13 @@
         <script src="index.js"></script>
     </head>
     <body>
-    	<div class="container">
-    		<div class="row">
-                <div class="col-med-3 blue-side"></div>
-    			<div class="col-med-1">
-    				<ul  id="imageList1" class="force-column-left"></ul>
-    			</div>
+    	<div class="container blue-side"></div>
+        <div class="container red-side"></div>        
+        <div class="container champ-list">
+            <div id="champ-list" class="row">
+                <div class="col-med-1">
+                    <ul  id="imageList1" class="force-column-left"></ul>
+                </div>
                 <div class="col-med-1">
                     <ul  id="imageList2" class="force-column-left"></ul>
                 </div>
@@ -34,10 +35,22 @@
                 </div>
                 <div class="col-med-1">
                     <ul  id="imageList6" class="force-column-left"></ul>
-                </div>                                
-                <div class="col-med-3 red-side"></div>
-    		</div>
-    	</div>
+                </div>     
+                <div class="col-med-1">
+                    <ul  id="imageList7" class="force-column-left"></ul>
+                </div>                            
+            </div><!--end row champ-list -->
+        </div><!--end container champ-list -->
+        <div class="container bans">
+            <div class="row">
+                <div class="col-med-3 blue-side-bans">
+                    <ul id="blue-side-bans"> </ul>
+                </div>
+                <div class="col-med-3 red-side-bans">
+                    <ul id="red-side-bans"> </ul>
+                </div>
+            </div>
+        </div><!--end container bans -->
     </body>
 </html>
 
