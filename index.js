@@ -3,6 +3,8 @@ $(document).ready(function() {
     var ddragonVersion;
     var champImgUrl;
     var gridColumnArray = ["#imageList1", "#imageList2", "#imageList3", "#imageList4", "#imageList5", "#imageList6", "#imageList7"];
+    var champList = {};
+    var sortableChampList = [];
     $.ajax({
         url:"https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=8de9b045-bbd0-4c39-9a8f-c4dfd32e157b",
         datatype: "json",
@@ -18,14 +20,31 @@ $(document).ready(function() {
         url: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=8de9b045-bbd0-4c39-9a8f-c4dfd32e157b",
         datatype: "json",
         success: function(response){
-            var iterator = 0;
+            
             $.each(response.data, function(index, champion){
-                iterator++;
-                if (iterator > 6){iterator = 0};
+                var champName = champion.name;
+                var imageFileName = champion.image.full;
 
-                champImgUrl = "http://ddragon.leagueoflegends.com/cdn/" + ddragonVersion + "/img/champion/" + champion.image.full;
-                $(gridColumnArray[iterator]).append('<img id="' + champion.name + '"class=\'icon\' src="' + champImgUrl + '" />');
+                champList[champName] = champion;
+                sortableChampList.push(champName)
             })
+
+            sortableChampList.sort();
+            console.log(sortableChampList);
+            var iterator = 0;
+            for (var i = 0; i <= sortableChampList.length - 1; i++) {
+                var champName = sortableChampList[i];
+
+                var imageFileName = champList[champName].image.full;
+
+                champImgUrl = "http://ddragon.leagueoflegends.com/cdn/" + ddragonVersion + "/img/champion/" + imageFileName;
+                $(gridColumnArray[iterator]).append('<img id="' + champName + '"class=\'icon\' src="' + champImgUrl + '" />');
+
+                iterator++;
+                if (iterator > 6){
+                    iterator = 0; 
+                }
+            };
         }
     })
 
