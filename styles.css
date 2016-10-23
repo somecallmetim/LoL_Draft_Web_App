@@ -2,8 +2,7 @@
 	padding: 0;
 	border: none;
 	width: 100%;
-	background-color: #190B07;
-	z-index: -1;
+	/*background-color: #16132A;*/
 }
 
 .blue-side {
@@ -13,7 +12,7 @@
 	width: 200px;
 	height: 716px;
 	margin: 10px;
-	z-index: -1;
+
 }
 
 .champ-list {
@@ -23,13 +22,13 @@
 	width: 1025px;
 	height: 716px;
 	overflow: auto;
-	z-index: -1;
+
 }
 
 #champ-list {
 	width: 100%;
 	padding-left: 15px;
-	z-index: -1;
+
 }
 
 .red-side {
@@ -39,15 +38,16 @@
 	width: 200px;
 	height: 716px;
 	margin: 10px;
-	z-index: -1;
+
 }
 
 .bans {
-	height: 150px;
+	height: 155px;
 	width: 1400px;
 	margin: 25px auto;
+	padding: 5px;
 	border-style: ridge;
-	z-index: -1;
+
 }
 
 .force-column-left {
@@ -55,27 +55,47 @@
 	padding: 0;
 	width: 120px;
 	margin: 10px;
-	z-index: -1;
+}
+
+#blue-side-picks {
+	padding: 0;
+}
+
+.bans-container{
+	width: 405px;
+	height: 140px;
+	border-style: ridge;
+}
+
+.row-adjustment{
+	margin: 0;
+}
+
+#blue-side-bans-container {
+	float: left;
+}
+
+#red-side-bans-container {
+	float: right;
+}
+
+
+#red-side-picks {
+ 	padding: 0;
 }
 
 #blue-side-bans {
 	float: left;
-	padding: 10px;
-	z-index: -1;
+	padding: 0;
 }
 
 #red-side-bans {
-	float: right;
-	padding: 10px;
-	z-index: -1;
+	float: left;
+	padding: 0;
 }
 
 .icon {
 	margin: 5px;
 	padding-left: 2px;
 	z-index: 1;
-}
-
-.new {
-
 }
