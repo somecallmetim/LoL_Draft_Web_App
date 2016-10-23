@@ -48,7 +48,7 @@ $(document).ready(function() {
 
                 getIconImage(champName, gridColumnArray[iterator], false);
 
-                setIconAsClickable(champName);
+                setMainIconAsClickable(champName);
 
                 iterator++;
                 if (iterator > 6){
@@ -72,6 +72,7 @@ $(document).ready(function() {
                 case "blue-side-container":
                     if(bluePicks < 5){
                         getIconImage(champId, "#blue-side-picks", true);
+                        setPickBanIconAsClickable(champId + "_New", "blue-side-container");
                         bluePicks++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
@@ -82,6 +83,7 @@ $(document).ready(function() {
                 case "red-side-container":
                     if(redPicks < 5) {
                         getIconImage(champId, "#red-side-picks", true);
+                        setPickBanIconAsClickable(champId + "_New", "red-side-container");
                         redPicks++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
@@ -92,7 +94,9 @@ $(document).ready(function() {
                 case "blue-side-bans-container":
                     if(blueBans < 3){
                         getIconImage(champId, "#blue-side-bans", true);
+                        setPickBanIconAsClickable(champId + "_New", "blue-side-bans-container");
                         blueBans++;
+                        console.log(blueBans);
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
@@ -101,7 +105,8 @@ $(document).ready(function() {
                 break;
                 case "red-side-bans-container":
                     if(redBans < 3){
-                        getIconImage(champId, "#red-side-bans", true);                        
+                        getIconImage(champId, "#red-side-bans", true);
+                        setPickBanIconAsClickable(champId + "_New", "red-side-bans-container");
                         redBans++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
@@ -124,10 +129,14 @@ $(document).ready(function() {
         champImgUrl = "http://ddragon.leagueoflegends.com/cdn/" + ddragonVersion + "/img/champion/" + imageFileName;
 
         if(isPickOrBan){
+            var champTitle = champId;
             champId = champId + "_New";
+            champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champTitle +'" src="' + champImgUrl + '" />'
+        }else {
+            champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champId +'" src="' + champImgUrl + '" />'
         }
 
-        champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champId +'" src="' + champImgUrl + '" />'
+
         $(listToAddId).append(champIcon); 
     }
 
@@ -138,7 +147,7 @@ $(document).ready(function() {
         $(document).off();
     }
 
-    function setIconAsClickable(champId){
+    function setMainIconAsClickable(champId){
         champId = "#" + champId;
         $(champId).click(function(e){
             if(!isAnIconActive){
@@ -162,7 +171,45 @@ $(document).ready(function() {
             }
         });
     }
-    
+
+    function setPickBanIconAsClickable(champId, assignedList) {
+        var jChampId = "#" + champId;
+        $(jChampId).click(function(e){
+            console.log(jChampId);
+            if(!isAnIconActive){
+                isAnIconActive = true;
+                $(jChampId).css("opacity", 0.33);
+
+                $(document).keydown(function(e){
+                    if(e.keyCode == 27){ // escape key maps to keycode `27`
+                        $(jChampId).css("opacity", 1);
+                        isAnIconActive = false;
+                    }else if(e.keyCode == 13){
+                        var originalChamp = champId.replace("_New", "");
+                        removeIcon(champId);
+                        switch (assignedList) {
+                            case "blue-side-container":
+                                bluePicks--;
+                                break;
+                            case "red-side-container":
+                                redPicks--;
+                                break;
+                            case "blue-side-bans-container":
+                                blueBans--;
+                                break;
+                            case "red-side-bans-container":
+                                redBans--;
+                                break;
+                            default:
+                                break;
+                        }
+                        $("#" + originalChamp).css("opacity", 1);
+                        setMainIconAsClickable(originalChamp);
+                    }
+                })
+            }
+        });
+    }
     function dragMoveListener (event) {
         //console.log(event.type, event.pageX, event.pageY);
         var targetId = "#" + event.target.id;
