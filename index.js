@@ -65,6 +65,7 @@ $(document).ready(function() {
 
             var champId = event.relatedTarget.id;
             removeIcon(event.relatedTarget.id);
+
             var champId = champId.replace("_Temp", "");
 
             switch (event.target.id) {
@@ -72,7 +73,7 @@ $(document).ready(function() {
                     if(bluePicks < 5){
                         getIconImage(champId, "#blue-side-picks", true);
                         bluePicks++;
-                        $("#" + champId).css("opacity", 0.25);
+                        $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -82,7 +83,7 @@ $(document).ready(function() {
                     if(redPicks < 5) {
                         getIconImage(champId, "#red-side-picks", true);
                         redPicks++;
-                        $("#" + champId).css("opacity", 0.25);
+                        $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -92,7 +93,7 @@ $(document).ready(function() {
                     if(blueBans < 3){
                         getIconImage(champId, "#blue-side-bans", true);
                         blueBans++;
-                        $("#" + champId).css("opacity", 0.25);
+                        $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -102,7 +103,7 @@ $(document).ready(function() {
                     if(redBans < 3){
                         getIconImage(champId, "#red-side-bans", true);                        
                         redBans++;
-                        $("#" + champId).css("opacity", 0.25);
+                        $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -123,13 +124,11 @@ $(document).ready(function() {
         champImgUrl = "http://ddragon.leagueoflegends.com/cdn/" + ddragonVersion + "/img/champion/" + imageFileName;
 
         if(isPickOrBan){
-            champIcon = '<img id="' + champId + '_New" class="icon" src="' + champImgUrl + '" />'
-        }else {
-            champIcon = '<img id="' + champId + '"class="icon" src="' + champImgUrl + '" />'
+            champId = champId + "_New";
         }
 
-        $(listToAddId).append(champIcon);
-        
+        champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champId +'" src="' + champImgUrl + '" />'
+        $(listToAddId).append(champIcon); 
     }
 
     function removeIcon(champId) {
@@ -183,6 +182,25 @@ $(document).ready(function() {
         target.setAttribute('data-x', x);
         target.setAttribute('data-y', y);
     }
+
+    $('.masterTooltip').hover(function(){
+        // Hover over code
+        var title = $(this).attr('title');
+        $(this).data('tipText', title).removeAttr('title');
+        $('<p class="tooltip"></p>')
+        .text(title)
+        .appendTo('body')
+        .fadeIn('slow');
+    }, function() {
+        // Hover out code
+        $(this).attr('title', $(this).data('tipText'));
+        $('.tooltip').remove();
+    }).mousemove(function(e) {
+        var mousex = e.pageX + 20; //Get X coordinates
+        var mousey = e.pageY + 10; //Get Y coordinates
+        $('.tooltip')
+        .css({ top: mousey, left: mousex })
+    });
 });
 //debugger;
 //console.log(champImgUrl);
