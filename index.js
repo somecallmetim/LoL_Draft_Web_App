@@ -72,7 +72,7 @@ $(document).ready(function() {
                     if(bluePicks < 5){
                         getIconImage(champId, "#blue-side-picks", true);
                         bluePicks++;
-                        $("#" + champId).css("opacity", 0.5);
+                        $("#" + champId).css("opacity", 0.25);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -82,7 +82,7 @@ $(document).ready(function() {
                     if(redPicks < 5) {
                         getIconImage(champId, "#red-side-picks", true);
                         redPicks++;
-                        $("#" + champId).css("opacity", 0.5);
+                        $("#" + champId).css("opacity", 0.25);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -92,7 +92,7 @@ $(document).ready(function() {
                     if(blueBans < 3){
                         getIconImage(champId, "#blue-side-bans", true);
                         blueBans++;
-                        $("#" + champId).css("opacity", 0.5);
+                        $("#" + champId).css("opacity", 0.25);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
@@ -102,7 +102,7 @@ $(document).ready(function() {
                     if(redBans < 3){
                         getIconImage(champId, "#red-side-bans", true);                        
                         redBans++;
-                        $("#" + champId).css("opacity", 0.5);
+                        $("#" + champId).css("opacity", 0.25);
                         $("#" + champId).off();
                     }else {
                         $("#" + champId).css("opacity", 1);
