@@ -96,7 +96,6 @@ $(document).ready(function() {
                         getIconImage(champId, "#blue-side-bans", true);
                         setPickBanIconAsClickable(champId + "_New", "blue-side-bans-container");
                         blueBans++;
-                        console.log(blueBans);
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
@@ -175,18 +174,20 @@ $(document).ready(function() {
     function setPickBanIconAsClickable(champId, assignedList) {
         var jChampId = "#" + champId;
         $(jChampId).click(function(e){
-            console.log(jChampId);
             if(!isAnIconActive){
                 isAnIconActive = true;
-                $(jChampId).css("opacity", 0.33);
+                $(jChampId).css("opacity", 0.6);
+                $(jChampId).attr("title", "Press ENTER to remove or ESC to cancel");
 
                 $(document).keydown(function(e){
                     if(e.keyCode == 27){ // escape key maps to keycode `27`
                         $(jChampId).css("opacity", 1);
+                        $(jChampId).attr("title", champId);
                         isAnIconActive = false;
                     }else if(e.keyCode == 13){
                         var originalChamp = champId.replace("_New", "");
                         removeIcon(champId);
+                        isAnIconActive = false;
                         switch (assignedList) {
                             case "blue-side-container":
                                 bluePicks--;
