@@ -1,0 +1,55 @@
+#champ-select {
+    width: 1125px;
+}
+
+.blue-side {
+    padding: 22.5px;
+    width: 150px;
+    height: 537px;
+    margin: 7.5px;
+}
+
+
+.champ-list {
+    margin:  7.5px auto;
+    width: 768.75px;
+    height: 537px;
+    overflow: auto;
+
+}
+
+#champ-list {
+    width: 100%;
+    padding-left: 11.25px;
+
+}
+
+.red-side {
+    padding: 22.5px;
+    width: 150px;
+    height: 537px;
+    margin: 7.5px;
+}
+
+.bans {
+    height: 116.25px;
+    width: 1050px;
+    margin: 18.75px auto;
+    padding: 3.75px;
+}
+
+.force-column-left {
+    width: 90px;
+    margin: 7.5px;
+}
+
+.bans-container{
+    width: 303.75px;
+    height: 105px;
+}
+
+.icon {
+    margin: 4px;
+    height: 85px;
+    width: 85px;
+}

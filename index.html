@@ -5,9 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Tyger's LoL Draft App</title>
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="styles.css">
+        <!-- CSS --><!-- CSS
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+        <link rel="stylesheet" href="largeWindowStyles.css">
+        <link rel="stylesheet" href="medWindowStyles.css" media="(max-width:1502px)">
         <!-- JavaScript -->
         <!--<script src="//cdn.jsdelivr.net/interact.js/1.2.6/interact.min.js"></script>-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -24,35 +25,35 @@
             </div>        
             <div class="container champ-list">
                 <div id="champ-list" class="row">
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList1" class="force-column-left"></ul>
                     </div>
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList2" class="force-column-left"></ul>
                     </div>
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList3" class="force-column-left"></ul>
                     </div>
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList4" class="force-column-left"></ul>
                     </div>
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList5" class="force-column-left"></ul>
                     </div>
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList6" class="force-column-left"></ul>
                     </div>     
-                    <div class="col-med-1">
+                    <div class="champSelectColumn">
                         <ul  id="imageList7" class="force-column-left"></ul>
                     </div>                            
                 </div><!--end row champ-list -->
             </div><!--end container champ-list -->
             <div class="container bans">
                 <div class="row row-adjustment">
-                    <div id="blue-side-bans-container" class="col-med-3 bans-container dropzone">
+                    <div id="blue-side-bans-container" class="bans-container dropzone">
                         <ul id="blue-side-bans"> </ul>
                     </div>
-                    <div id="red-side-bans-container" class="col-med-3 bans-container dropzone">
+                    <div id="red-side-bans-container" class="bans-container dropzone">
                         <ul id="red-side-bans"> </ul>
                     </div>
                 </div>

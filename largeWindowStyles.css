@@ -14,26 +14,26 @@ body {
 #champ-select {
 	padding: 0;
 	border: none;
-	width: 100%;
-	/*background-color: #16132A;*/
+	margin: auto;
+	width: 1400px;
 }
 
 .blue-side {
 	float: left;
-	padding: 30px;
+	padding: 15px;
 	border-style: ridge;
-	width: 200px;
-	height: 716px;
+	width: 150px;
+	width: 150px;
+	height: 616px;
 	margin: 10px;
 
 }
 
 .champ-list {
 	padding: 0;
-	/*border-style: ridge;*/
 	margin:  10px auto;
 	width: 1025px;
-	height: 716px;
+	height: 525px;
 	overflow: auto;
 
 }
@@ -41,15 +41,14 @@ body {
 #champ-list {
 	width: 100%;
 	padding-left: 15px;
-
 }
 
 .red-side {
 	float:right;
-	padding: 30px;
+	padding: 15px;
 	border-style: ridge;
-	width: 200px;
-	height: 716px;
+	width: 150px;
+	height: 616px;
 	margin: 10px;
 
 }
@@ -59,7 +58,6 @@ body {
 	width: 1400px;
 	margin: 25px auto;
 	padding: 5px;
-	/*border-style: ridge;*/
 
 }
 
@@ -72,11 +70,12 @@ body {
 
 #blue-side-picks {
 	padding: 0;
+	margin: auto auto;
 }
 
 .bans-container{
-	width: 405px;
-	height: 140px;
+	width: 340px;
+	height: 120px;
 	border-style: ridge;
 }
 
@@ -86,31 +85,37 @@ body {
 
 #blue-side-bans-container {
 	float: left;
+	margin-left: 100px;
 }
 
 #red-side-bans-container {
 	float: right;
+	margin-right: 100px;
 }
 
 
 #red-side-picks {
  	padding: 0;
+	margin: auto auto;
 }
 
 #blue-side-bans {
 	float: left;
 	padding: 0;
+	margin: auto auto;
 }
 
 #red-side-bans {
 	float: left;
 	padding: 0;
+	margin: 0;
 }
 
 .icon {
 	margin: 5px;
 	padding-left: 2px;
-	z-index: 1;
+	height: 100px;
+	width: 100px;
 }
 
 .tooltip {
