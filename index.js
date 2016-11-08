@@ -31,28 +31,29 @@ $(document).ready(function() {
             
             $.each(response.data, function(index, champion){
                 var champName = champion.name;
+                //remove chars that are undesirable in champion names
                 champName = champName.replace("'", "");
                 champName = champName.replace(".", "");
                 champName = champName.replace(" ", "");
-
-                var imageFileName = champion.image.full;
 
                 champList[champName] = champion;
                 sortableChampList.push(champName)
             })
 
+            //put champs in alphabetical order
             sortableChampList.sort();
 
             var iterator = 0;
+
+            //iterate through all champs, add image to main champ list, set as clickable
             for (var i = 0; i <= sortableChampList.length - 1; i++) {
                 var champName = sortableChampList[i];
-                var imageFileName = champList[champName].image.full;
-                var champIcon;
 
-                getIconImage(champName, gridColumnArray[iterator], false);
+                placeIconImageInList(champName, gridColumnArray[iterator], false);
 
                 setMainIconAsClickable(champName);
 
+                //keeps track of which column each icon should go in
                 iterator++;
                 if (iterator > 6){
                     iterator = 0; 
@@ -61,59 +62,72 @@ $(document).ready(function() {
         }
     })
 
-    //handles drop logic for picks and bans
+    //handles drop logic for picks and bans utilizing interact.js library ('.dropzone' denotes an html class)
     interact('.dropzone').dropzone({
+        //sets overlap required to activate the dropzone listener
         overlap: 0.25,
-        ondrop: function (event) {
-            //console.log(event.relatedTarget.id);
 
+        ondrop: function (event) {
+
+            //gets id of champ being dropped
             var champId = event.relatedTarget.id;
+            //removes the temporary icon that was being dragged
             removeIcon(event.relatedTarget.id);
 
-            var champId = champId.replace("_Temp", "");
+            //gets us the champ id we need to retrieve appropriate icon
+            champId = champId.replace("_TempIcon", "");
 
+            //determines where the temp icon was dropped and creates a new icon in the appropriate list
             switch (event.target.id) {
                 case "blue-side-container":
+                    //ensures no side can pick more than 5 champs
                     if(bluePicks < 5){
-                        getIconImage(champId, "#blue-side-picks", true);
-                        setPickBanIconAsClickable(champId + "_New", "blue-side-container");
+                        placeIconImageInList(champId, "#blue-side-picks", true);
+                        setPickBanIconAsClickable(champId + "_PickBanIcon", "blue-side-container");
                         bluePicks++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
+                        //resets main champ list icon if too many champs already have been placed here
                         $("#" + champId).css("opacity", 1);
                     }
                 break;
                 case "red-side-container":
+                    //ensures no side can pick more than 5 champs
                     if(redPicks < 5) {
-                        getIconImage(champId, "#red-side-picks", true);
-                        setPickBanIconAsClickable(champId + "_New", "red-side-container");
+                        placeIconImageInList(champId, "#red-side-picks", true);
+                        setPickBanIconAsClickable(champId + "_PickBanIcon", "red-side-container");
                         redPicks++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
+                        //resets main champ list icon if too many champs already have been placed here
                         $("#" + champId).css("opacity", 1);
                     }
                 break;
                 case "blue-side-bans-container":
+                    //ensures no side gets more than 3 bans
                     if(blueBans < 3){
-                        getIconImage(champId, "#blue-side-bans", true);
-                        setPickBanIconAsClickable(champId + "_New", "blue-side-bans-container");
+                        placeIconImageInList(champId, "#blue-side-bans", true);
+                        setPickBanIconAsClickable(champId + "_PickBanIcon", "blue-side-bans-container");
                         blueBans++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
+                        //resets main champ list icon if too many champs already have been placed here
                         $("#" + champId).css("opacity", 1);
                     }
                 break;
                 case "red-side-bans-container":
+                    //ensures no side gets more than 3 bans
                     if(redBans < 3){
-                        getIconImage(champId, "#red-side-bans", true);
-                        setPickBanIconAsClickable(champId + "_New", "red-side-bans-container");
+                        placeIconImageInList(champId, "#red-side-bans", true);
+                        setPickBanIconAsClickable(champId + "_PickBanIcon", "red-side-bans-container");
                         redBans++;
                         $("#" + champId).css("opacity", 0.33);
                         $("#" + champId).off();
                     }else {
+                        //resets main champ list icon if too many champs already have been placed here
                         $("#" + champId).css("opacity", 1);
                     }
 
@@ -125,8 +139,8 @@ $(document).ready(function() {
         }
     });
 
-    //retrieves an icon image and gives it an appropriate unique id
-    function getIconImage (champId, listToAddId, isPickOrBan){
+    //retrieves an icon image, puts it on webpage, and gives it an appropriate unique id
+    function placeIconImageInList (champId, listToAddId, isPickOrBan){
 
         var imageFileName = champList[champId].image.full;
         var champIcon;
@@ -134,7 +148,7 @@ $(document).ready(function() {
 
         if(isPickOrBan){
             var champTitle = champId;
-            champId = champId + "_New";
+            champId = champId + "_PickBanIcon";
             champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champTitle +'" src="' + champImgUrl + '" />'
         }else {
             champIcon = '<img id="' + champId + '"class="icon masterTooltip" title="' + champId +'" src="' + champImgUrl + '" />'
@@ -156,19 +170,25 @@ $(document).ready(function() {
     function setMainIconAsClickable(champId){
         champId = "#" + champId;
         $(champId).click(function(e){
+            //makes sure there isn't an icon that has been clicked and left in an unresolved state
+            //this way you don't end up with several selected icons at once
             if(!isAnIconActive){
                 isAnIconActive = true;
-                var newId = this.id + "_Temp"
+                //sets up new temporary icon id
+                var newId = this.id + "_TempIcon"
+                //clones the icon that was clicked, gives it tempId, places it slightly offset from the original
                 $(champId).clone().prop('id', newId).appendTo("#champ-select").offset({left:e.pageX,top:e.pageY});
 
-
+                //makes the temp icon draggable
                 interact("#" + newId).draggable({
                     onmove: dragMoveListener,
                     onend: function(event){
+                        //removes temp icon at the end of it's "drag" regardless of what else happens
                         removeIcon(event.target.id);
                     }
                 });
 
+                //allows user to to deselect current icon by hitting the esc key
                 $(document).keydown(function(e){
                     if(e.keyCode == 27){ // escape key maps to keycode `27`
                         removeIcon(newId);
@@ -181,21 +201,23 @@ $(document).ready(function() {
     //sets an icon as clickable in the pick or ban lists
     function setPickBanIconAsClickable(champId, assignedList) {
         var jChampId = "#" + champId;
+
         $(jChampId).click(function(e){
             if(!isAnIconActive){
                 isAnIconActive = true;
                 $(jChampId).css("opacity", 0.6);
                 $(jChampId).attr("title", "Press ENTER to remove or ESC to cancel");
-
+                //onclick add keylistener to doc that allows user to either remove or deselect the icon
                 $(document).keydown(function(e){
                     if(e.keyCode == 27){ // escape key maps to keycode `27`
                         $(jChampId).css("opacity", 1);
                         $(jChampId).attr("title", champId);
                         isAnIconActive = false;
-                    }else if(e.keyCode == 13){
-                        var originalChamp = champId.replace("_New", "");
+                    }else if(e.keyCode == 13){ // enter key maps to keycode `13`
+                        var originalChamp = champId.replace("_PickBanIcon", "");
                         removeIcon(champId);
                         isAnIconActive = false;
+                        //decriment appropriate variable to allow more picks/bans to be added
                         switch (assignedList) {
                             case "blue-side-container":
                                 bluePicks--;
@@ -212,6 +234,7 @@ $(document).ready(function() {
                             default:
                                 break;
                         }
+                        //reset icon in main champ list so it may once again be selected
                         $("#" + originalChamp).css("opacity", 1);
                         setMainIconAsClickable(originalChamp);
                     }
@@ -222,14 +245,11 @@ $(document).ready(function() {
 
     //allows a selected icon to be dragged about
     function dragMoveListener (event) {
-        //console.log(event.type, event.pageX, event.pageY);
-        var targetId = "#" + event.target.id;
-        //$(targetId).appendTo("#champ-select");
         var target = event.target,
             // keep the dragged position in the data-x/data-y attributes
             x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
             y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-        //console.log(targetId);
+
 
         // translate the element
         target.style.webkitTransform =
