@@ -10,6 +10,8 @@ $(document).ready(function() {
     var redBans = 0;
     var blueBans = 0;
     var isAnIconActive = false;
+
+    //retrieves current ddragon version
     $.ajax({
         url:"https://global.api.pvp.net/api/lol/static-data/na/v1.2/versions?api_key=8de9b045-bbd0-4c39-9a8f-c4dfd32e157b",
         datatype: "json",
@@ -21,6 +23,7 @@ $(document).ready(function() {
         }
     })
 
+    //gets all champ icons from Riot's API
     $.ajax({
         url: "https://global.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=image&api_key=8de9b045-bbd0-4c39-9a8f-c4dfd32e157b",
         datatype: "json",
@@ -58,6 +61,7 @@ $(document).ready(function() {
         }
     })
 
+    //handles drop logic for picks and bans
     interact('.dropzone').dropzone({
         overlap: 0.25,
         ondrop: function (event) {
@@ -121,6 +125,7 @@ $(document).ready(function() {
         }
     });
 
+    //retrieves an icon image and gives it an appropriate unique id
     function getIconImage (champId, listToAddId, isPickOrBan){
 
         var imageFileName = champList[champId].image.full;
@@ -139,6 +144,7 @@ $(document).ready(function() {
         $(listToAddId).append(champIcon); 
     }
 
+    //removes icon, sets global icon active flag to false, removes any key listeners from the document
     function removeIcon(champId) {
         isAnIconActive = false;
         var champId = "#" + champId;
@@ -146,6 +152,7 @@ $(document).ready(function() {
         $(document).off();
     }
 
+    //sets an icon as clickable and adds key listener for main champ list
     function setMainIconAsClickable(champId){
         champId = "#" + champId;
         $(champId).click(function(e){
@@ -171,6 +178,7 @@ $(document).ready(function() {
         });
     }
 
+    //sets an icon as clickable in the pick or ban lists
     function setPickBanIconAsClickable(champId, assignedList) {
         var jChampId = "#" + champId;
         $(jChampId).click(function(e){
@@ -211,6 +219,8 @@ $(document).ready(function() {
             }
         });
     }
+
+    //allows a selected icon to be dragged about
     function dragMoveListener (event) {
         //console.log(event.type, event.pageX, event.pageY);
         var targetId = "#" + event.target.id;
@@ -231,6 +241,7 @@ $(document).ready(function() {
         target.setAttribute('data-y', y);
     }
 
+    //adds tooltip to icons
     $('.masterTooltip').hover(function(){
         // Hover over code
         var title = $(this).attr('title');
